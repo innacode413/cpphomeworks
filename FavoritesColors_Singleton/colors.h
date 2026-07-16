@@ -16,4 +16,7 @@ private:
     unsigned int favoriteColors;
 
     FavoriteColors();
+
+    FavoriteColors(const FavoriteColors&) = delete;
+    FavoriteColors& operator=(const FavoriteColors&) = delete;
 };
