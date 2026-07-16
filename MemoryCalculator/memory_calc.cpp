@@ -42,6 +42,50 @@ int Calculator::calculate(const int& value1, const int& value2, const char& oper
     return 0;
 }
 
+Calculator& Calculator::operator+(int value) {
+    memory += value;
+    return *this;
+}
+
+Calculator& Calculator::operator-(int value) {
+    memory -= value;
+    return *this;
+}
+
+Calculator& Calculator::operator*(int value) {
+    memory *= value;
+    return *this;
+}
+
+Calculator& Calculator::operator/(int value) {
+    if (value != 0) {
+        memory /= value;
+    }
+    return *this;
+}
+
+Calculator& Calculator::operator+=(int value) {
+    memory += value;
+    return *this;
+}
+
+Calculator& Calculator::operator-=(int value) {
+    memory -= value;
+    return *this;
+}
+
+Calculator& Calculator::operator*=(int value) {
+    memory *= value;
+    return *this;
+}
+
+Calculator& Calculator::operator/=(int value) {
+    if (value != 0) {
+        memory /= value;
+    }
+    return *this;
+}
+
 int Calculator::getMemory() const {
     return memory;
 }

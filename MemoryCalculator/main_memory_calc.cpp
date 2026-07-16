@@ -2,26 +2,42 @@
 #include "memory_calc.h"
 
 int main() {
-    std::cout << "=== Тестування Calculator (Chain + Static) ===\n\n";
+    std::cout << "=== Тестування Calculator операторів ===\n\n";
 
-    Calculator calc1 = 10;
-    std::cout << "calc1 (через Calculator calc1 = 10)\n";
-    std::cout << "Початкова пам'ять calc1: " << calc1.GetCurrentValue() << "\n";
+    Calculator calc(10);
+    std::cout << "Start: " << calc.GetCurrentValue() << "\n\n";
 
-    int result = calc1.calculate(2, '+')
-                      .calculate(4, '-')
-                      .calculate(5, '*')
-                      .GetCurrentValue();
-    std::cout << "Chain: (10 + 2 - 4) * 5 = " << result << "\n\n";
+    std::cout << "--- calc + 5 ---\n";
+    (calc + 5);
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
 
-    Calculator calc2;
-    std::cout << "calc2 (конструктор за замовчуванням)\n";
-    std::cout << "Початкова пам'ять calc2: " << calc2.GetCurrentValue() << "\n";
-    calc2.calculate(25, '+');
-    std::cout << "calc2 після calculate(25, '+'): " << calc2.GetCurrentValue() << "\n\n";
+    std::cout << "--- calc - 3 ---\n";
+    (calc - 3);
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
 
-    int staticResult = Calculator::calculate(10, 10, '+');
-    std::cout << "Static: Calculator::calculate(10, 10, '+') = " << staticResult << "\n";
+    std::cout << "--- calc * 2 ---\n";
+    (calc * 2);
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
+
+    std::cout << "--- calc / 4 ---\n";
+    (calc / 4);
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
+
+    std::cout << "--- Chain: calc += 10, calc -= 2, calc *= 3, calc /= 4 ---\n";
+    calc += 10;
+    calc -= 2;
+    calc *= 3;
+    calc /= 4;
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
+
+    std::cout << "--- Mixed chain: calc + 5 * 10 ---\n";
+    calc.setStartValue(0);
+    calc + 5 * 10;
+    std::cout << "Result: " << calc.GetCurrentValue() << "\n\n";
+
+    std::cout << "--- Static: Calculator::calculate(10, 10, '+') ---\n";
+    int res = Calculator::calculate(10, 10, '+');
+    std::cout << "Result: " << res << "\n";
 
     return 0;
 }
