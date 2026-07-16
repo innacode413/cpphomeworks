@@ -1,57 +1,55 @@
 #include <iostream>
-#include <typeinfo>
-#include <limits>
+#include "vector.h"
 
 int main() {
+    std::cout << "=== Тестування класу vector ===\n\n";
 
-    int var_int = 42;
-    short var_short = 15;
-    long var_long = 3000000L;
-    float var_float = 3.14f;
-    double var_double = 2.71828;
-    bool var_bool = true;
+    vector v(5);
+    std::cout << "Initial size: " << v.getSize() << "\n\n";
 
-    std::cout << "=== TYPE: int ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_int).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_int) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<int>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<int>::max() << std::endl;
-    std::cout << "-----------------" << std::endl << std::endl;
+    v.set(0, 10);
+    v.set(4, 40);
 
-    std::cout << "=== TYPE: short ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_short).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_short) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<short>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<short>::max() << std::endl;
-    std::cout << "-------------------" << std::endl << std::endl;
+    std::cout << "Element at index 0: " << v.get(0) << "\n";
+    std::cout << "Element at index 4: " << v.get(4) << "\n\n";
 
-    std::cout << "=== TYPE: long ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_long).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_long) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<long>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<long>::max() << std::endl;
-    std::cout << "------------------" << std::endl << std::endl;
+    std::cout << "--- Resizing to 10 ---\n";
+    v.resize(10);
+    std::cout << "New size after resize: " << v.getSize() << "\n\n";
 
-    std::cout << "=== TYPE: float ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_float).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_float) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<float>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<float>::max() << std::endl;
-    std::cout << "-------------------" << std::endl << std::endl;
+    v.set(5, 50);
+    std::cout << "Element at index 5: " << v.get(5) << "\n\n";
 
-    std::cout << "=== TYPE: double ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_double).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_double) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<double>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<double>::max() << std::endl;
-    std::cout << "--------------------" << std::endl << std::endl;
+    std::cout << "--- Resizing to 3 ---\n";
+    v.resize(3);
+    std::cout << "New size after resize: " << v.getSize() << "\n\n";
 
-    std::cout << "=== TYPE: bool ===" << std::endl;
-    std::cout << "Type name: " << typeid(var_bool).name() << std::endl;
-    std::cout << "Size in bytes: " << sizeof(var_bool) << std::endl;
-    std::cout << "Min value: " << std::numeric_limits<bool>::min() << std::endl;
-    std::cout << "Max value: " << std::numeric_limits<bool>::max() << std::endl;
-    std::cout << "------------------" << std::endl << std::endl;
+    std::cout << "Final element at index 0: " << v.get(0) << "\n";
+    std::cout << "Final element at index 2: " << v.get(2) << "\n\n";
+
+    std::cout << "=== Тестування копіювання та операторів ===\n\n";
+
+    vector a(3);
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+
+    vector b(a);
+    std::cout << "b created via copy ctor, b[1] = " << b[1] << "\n";
+
+    vector c(3);
+    c = a;
+    std::cout << "c assigned via operator=, c[2] = " << c[2] << "\n";
+
+    std::cout << "a == b: " << (a == b) << "\n";
+    std::cout << "a != c: " << (a != c) << "\n";
+
+    b[1] = 99;
+    std::cout << "after b[1] = 99 -> a == b: " << (a == b) << "\n";
+    std::cout << "after b[1] = 99 -> a != b: " << (a != b) << "\n";
+
+    vector d(2);
+    std::cout << "a == d (different size): " << (a == d) << "\n";
 
     return 0;
 }
