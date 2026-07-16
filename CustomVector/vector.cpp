@@ -10,8 +10,40 @@ vector::vector(int sizeOffArray) {
     }
 }
 
+vector::vector(const vector& other) {
+    size = other.size;
+    if (size > 0) {
+        dynamicArray = new int[size];
+        for (int i = 0; i < size; ++i) {
+            dynamicArray[i] = other.dynamicArray[i];
+        }
+    } else {
+        dynamicArray = nullptr;
+    }
+}
+
 vector::~vector() {
     delete[] dynamicArray;
+}
+
+vector& vector::operator=(const vector& other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    delete[] dynamicArray;
+
+    size = other.size;
+    if (size > 0) {
+        dynamicArray = new int[size];
+        for (int i = 0; i < size; ++i) {
+            dynamicArray[i] = other.dynamicArray[i];
+        }
+    } else {
+        dynamicArray = nullptr;
+    }
+
+    return *this;
 }
 
 void vector::resize(int newSize) {
@@ -49,4 +81,28 @@ int vector::get(int index) const {
 
 int vector::getSize() const {
     return size;
+}
+
+int& vector::operator[](int index) {
+    return dynamicArray[index];
+}
+
+const int& vector::operator[](int index) const {
+    return dynamicArray[index];
+}
+
+bool vector::operator==(const vector& other) const {
+    if (size != other.size) {
+        return false;
+    }
+    for (int i = 0; i < size; ++i) {
+        if (dynamicArray[i] != other.dynamicArray[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool vector::operator!=(const vector& other) const {
+    return !(*this == other);
 }

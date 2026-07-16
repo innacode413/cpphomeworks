@@ -27,5 +27,29 @@ int main() {
     std::cout << "Final element at index 0: " << v.get(0) << "\n";
     std::cout << "Final element at index 2: " << v.get(2) << "\n\n";
 
+    std::cout << "=== Тестування копіювання та операторів ===\n\n";
+
+    vector a(3);
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+
+    vector b(a);
+    std::cout << "b created via copy ctor, b[1] = " << b[1] << "\n";
+
+    vector c(3);
+    c = a;
+    std::cout << "c assigned via operator=, c[2] = " << c[2] << "\n";
+
+    std::cout << "a == b: " << (a == b) << "\n";
+    std::cout << "a != c: " << (a != c) << "\n";
+
+    b[1] = 99;
+    std::cout << "after b[1] = 99 -> a == b: " << (a == b) << "\n";
+    std::cout << "after b[1] = 99 -> a != b: " << (a != b) << "\n";
+
+    vector d(2);
+    std::cout << "a == d (different size): " << (a == d) << "\n";
+
     return 0;
 }
